@@ -5,6 +5,8 @@ import errno
 import sys
 import subprocess
 import shutil
+import codecs
+
 
 import xml.etree.ElementTree as ET
 
@@ -20,18 +22,20 @@ def expandPackageToDirectory(inPackage,inDirectory):
 						 stderr=subprocess.PIPE)
 	stdout, stderr = process.communicate()
 
-# Check that the name of the distribution defined as the PRODUCT_ID user defined setting uses the default value set during the build process
+# Check that the title of the distribution defined as the PRESENTATION_TITLE user defined setting is correctly converted during the build process
 
-test_displayed_name="uds > distribution > advanced option > product id - default value"
+test_displayed_name="uds > distribution > presentation > localized title - dynamic value"
 
 # Given
 
+user_defined_presentation_title='English Title'
+
 dirname = os.path.dirname(__file__)
-projectpath = os.path.join(dirname, 'test_uds_distribution_distribution_advanced_options_product_id.pkgproj')
+projectpath = os.path.join(dirname, 'test_uds_distribution_distribution_presentation_localized_title.pkgproj')
 
 # When
 
-process = subprocess.Popen(['/usr/local/bin/packagesbuild', '--project', projectpath ],
+process = subprocess.Popen(['/usr/local/bin/packagesbuild', '--project', projectpath, 'PRESENTATION_TITLE={}'.format(user_defined_presentation_title)],
                      stdout=subprocess.PIPE, 
                      stderr=subprocess.PIPE)
 stdout, stderr = process.communicate()
@@ -39,7 +43,7 @@ stdout, stderr = process.communicate()
 
 # Then
 
-expected_distribution_product_id='default'
+expected_localizable_string_line=u'\"DISTRIBUTION_TITLE\" = \"English Title\";'
 
 
 build_directory=os.path.join(dirname, 'build')
@@ -49,14 +53,18 @@ extraction_directory=os.path.join(dirname, 'extracted')
 expandPackageToDirectory(os.path.join(build_directory, 'distribution.pkg'),extraction_directory)
 
 
-tree=ET.parse(os.path.join(extraction_directory, 'Distribution'))
+found = False
 
-root = tree.getroot()
-options_node = root.find("product")
+for line in codecs.open(os.path.join(dirname, 'extracted', 'Resources', 'en.lproj', 'Localizable.strings'), encoding='utf-16'):
+	if u'DISTRIBUTION_TITLE' in line:
+		
+		line = line.rstrip('\r\n')
+		
+		if (line == expected_localizable_string_line):
+			found = True
 
-product_id=options_node.attrib['id']
 
-if (product_id == expected_distribution_product_id):
+if (found == True):
 	print("[+] " + test_displayed_name + ": " + '\033[1m' + "Success" + '\033[0m')
 else:
 	print("[-] " + test_displayed_name + ": " + '\033[91m' + "Failure" + '\033[0m')

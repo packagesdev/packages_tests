@@ -49,9 +49,7 @@ extraction_directory=os.path.join(dirname, 'extracted')
 expandPackageToDirectory(os.path.join(build_directory, 'distribution.pkg'),extraction_directory)
 
 
-os.chdir(extraction_directory)
-
-tree=ET.parse('Distribution')
+tree=ET.parse(os.path.join(extraction_directory, 'Distribution'))
 
 root = tree.getroot()
 options_node = root.find("product")

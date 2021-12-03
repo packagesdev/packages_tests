@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 
 # Check that the path of the elastic folder defined by the ELASTIC_FOLDER_NAME user defined setting is correctly converted during the build process
 
-test_displayed_name="uds > raw package > payload - elastic folder - dynamic value"
+test_displayed_name="uds > raw package > payload - elastic folder - default value"
 
 # Given
 
