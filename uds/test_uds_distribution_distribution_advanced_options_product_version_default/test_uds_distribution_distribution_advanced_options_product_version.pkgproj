@@ -18,7 +18,7 @@
 				<key>FOLLOW_SYMBOLIC_LINKS</key>
 				<false/>
 				<key>IDENTIFIER</key>
-				<string>com.mygreatcompany.pkg.packagee</string>
+				<string>com.mygreatcompany.pkg.package</string>
 				<key>LOCATION</key>
 				<integer>0</integer>
 				<key>NAME</key>
@@ -71,10 +71,8 @@
 		<dict>
 			<key>ADVANCED_OPTIONS</key>
 			<dict>
-				<key>installer-script.options:hostArchitectures</key>
-				<array>
-					<string>${HOST_ARCHITECTURES}</string>
-				</array>
+				<key>installer-script.product:version</key>
+				<string>${PRODUCT_VERSION}</string>
 			</dict>
 			<key>BUILD_FORMAT</key>
 			<integer>0</integer>
@@ -261,8 +259,8 @@
 			<false/>
 			<key>USER_DEFINED_SETTINGS</key>
 			<dict>
-				<key>HOST_ARCHITECTURES</key>
-				<string>i386</string>
+				<key>PRODUCT_VERSION</key>
+				<string>1.0</string>
 			</dict>
 		</dict>
 	</dict>
