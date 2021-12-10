@@ -22,18 +22,20 @@ def expandPackageToDirectory(inPackage,inDirectory):
 						 stderr=subprocess.PIPE)
 	stdout, stderr = process.communicate()
 
-# Check that the name of the package component of the distribution as the COMPONENT_NAME user defined setting uses the default value set during the build process
+# Check that the location of the package component of the distribution as the COMPONENT_LOCATION_PATH user defined setting is correctly converted during the build process
 
-test_displayed_name="uds > distribution > component > name - dynamic value"
+test_displayed_name="uds > distribution > component > location path - dynamic value"
 
 # Given
 
+user_defined_component_location_path='www.example.com'
+
 dirname = os.path.dirname(__file__)
-projectpath = os.path.join(dirname, 'test_uds_distribution_distribution_component_name.pkgproj')
+projectpath = os.path.join(dirname, 'test_uds_distribution_distribution_component_location_path.pkgproj')
 
 # When
 
-process = subprocess.Popen(['/usr/local/bin/packagesbuild', '--project', projectpath],
+process = subprocess.Popen(['/usr/local/bin/packagesbuild', '--project', projectpath, 'COMPONENT_LOCATION_PATH={}'.format(user_defined_component_location_path)],
                      stdout=subprocess.PIPE, 
                      stderr=subprocess.PIPE)
 stdout, stderr = process.communicate()
@@ -41,7 +43,7 @@ stdout, stderr = process.communicate()
 
 # Then
 
-expected_component_name='default'
+expected_component_location_path='www.example.com'
 
 
 build_directory=os.path.join(dirname, 'build')
@@ -51,7 +53,7 @@ extraction_directory=os.path.join(dirname, 'extracted')
 expandPackageToDirectory(os.path.join(build_directory, 'distribution.pkg'),extraction_directory)
 
 
-if (os.path.exists(os.path.join(extraction_directory,'{}.pkg'.format(expected_component_name))) == False ):
+if (os.path.exists(os.path.join(build_directory,'http','package.pkg')) == False ):
 
 	print("[-] " + test_displayed_name + ": " + '\033[91m' + "Failure" + '\033[0m')
 
@@ -73,9 +75,8 @@ else:
 				package_file_reference_text = node.text
 			
 				break
-		
 
-	if (package_file_reference_text == "#{}.pkg".format(expected_component_name)):
+	if (package_file_reference_text == "http://{}/package.pkg".format(expected_component_location_path)):
 		print("[+] " + test_displayed_name + ": " + '\033[1m' + "Success" + '\033[0m')
 	else:
 		print("[-] " + test_displayed_name + ": " + '\033[91m' + "Failure" + '\033[0m')
