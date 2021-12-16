@@ -1,9 +1,12 @@
 #!/usr/bin/env python2
 
 import os
+import errno
 import sys
 import subprocess
 import shutil
+import codecs
+
 
 import xml.etree.ElementTree as ET
 
@@ -19,20 +22,18 @@ def expandPackageToDirectory(inPackage,inDirectory):
 						 stderr=subprocess.PIPE)
 	stdout, stderr = process.communicate()
 
-# Check that the version of the package set by the PACKAGE_VERSION user defined setting is correctly converted during the build process
+# Check that the explanation of the distribution requirement defined as the LOCALIZED_EXPLANATION user defined setting uses the default value set during the build process
 
-test_displayed_name="uds > raw package > version - dynamic value"
+test_displayed_name="uds > distribution > requirement > localized explanation - default value"
 
 # Given
 
-user_defined_version='1.2.3'
-
 dirname = os.path.dirname(__file__)
-projectpath = os.path.join(dirname, 'test_uds_rawpackage_version.pkgproj')
+projectpath = os.path.join(dirname, 'test_uds_distribution_requirement_localized_explanation.pkgproj')
 
 # When
 
-process = subprocess.Popen(['/usr/local/bin/packagesbuild', '--project', projectpath , 'PACKAGE_VERSION={}'.format(user_defined_version)],
+process = subprocess.Popen(['/usr/local/bin/packagesbuild', '--project', projectpath ],
                      stdout=subprocess.PIPE, 
                      stderr=subprocess.PIPE)
 stdout, stderr = process.communicate()
@@ -40,26 +41,34 @@ stdout, stderr = process.communicate()
 
 # Then
 
-expected_version = '1.2.3'
+expected_localizable_string_line=u'\"REQUIREMENT_FAILED_MESSAGE_VOLUME_CHECK_1\" = \"default\";'
 
 
 build_directory=os.path.join(dirname, 'build')
 
 extraction_directory=os.path.join(dirname, 'extracted')
 
-expandPackageToDirectory(os.path.join(build_directory, 'raw_package.pkg'),extraction_directory)
+expandPackageToDirectory(os.path.join(build_directory, 'distribution.pkg'),extraction_directory)
 
 
-tree=ET.parse(os.path.join(extraction_directory, 'PackageInfo'))
+found = False
 
-root = tree.getroot()
+for line in codecs.open(os.path.join(dirname, 'extracted', 'Resources', 'en.lproj', 'Localizable.strings'), encoding='utf-16'):
+	
+	if u'REQUIREMENT_FAILED_MESSAGE_VOLUME_CHECK_1' in line:
+		
+		line = line.rstrip('\r\n')
+		
+		if (line == expected_localizable_string_line):
+			found = True
 
-version = root.attrib['version']
 
-if (version == expected_version):
+if (found == True):
 	print("[+] " + test_displayed_name + ": " + '\033[1m' + "Success" + '\033[0m')
 else:
 	print("[-] " + test_displayed_name + ": " + '\033[91m' + "Failure" + '\033[0m')
+
+
 
 # Cleanup
 
@@ -67,5 +76,3 @@ shutil.rmtree(build_directory)
 shutil.rmtree(extraction_directory)
 
 sys.exit()
-
-

@@ -1,9 +1,12 @@
 #!/usr/bin/env python2
 
 import os
+import errno
 import sys
 import subprocess
 import shutil
+import codecs
+
 
 import xml.etree.ElementTree as ET
 
@@ -19,20 +22,18 @@ def expandPackageToDirectory(inPackage,inDirectory):
 						 stderr=subprocess.PIPE)
 	stdout, stderr = process.communicate()
 
-# Check that the version of the package set by the PACKAGE_VERSION user defined setting is correctly converted during the build process
+# Check that the path used for the distribution files requirement defined as the REQUIREMENT_FILE_PATH user defined settings uses the default values set during the build process
 
-test_displayed_name="uds > raw package > version - dynamic value"
+test_displayed_name="uds > distribution > requirement > files path - dynamic value"
 
 # Given
 
-user_defined_version='1.2.3'
-
 dirname = os.path.dirname(__file__)
-projectpath = os.path.join(dirname, 'test_uds_rawpackage_version.pkgproj')
+projectpath = os.path.join(dirname, 'test_uds_distribution_requirement_files_path.pkgproj')
 
 # When
 
-process = subprocess.Popen(['/usr/local/bin/packagesbuild', '--project', projectpath , 'PACKAGE_VERSION={}'.format(user_defined_version)],
+process = subprocess.Popen(['/usr/local/bin/packagesbuild', '--project', projectpath ],
                      stdout=subprocess.PIPE, 
                      stderr=subprocess.PIPE)
 stdout, stderr = process.communicate()
@@ -40,26 +41,36 @@ stdout, stderr = process.communicate()
 
 # Then
 
-expected_version = '1.2.3'
-
+expected_source_line="		var tFilesToCheck0=new Array('default');"
 
 build_directory=os.path.join(dirname, 'build')
 
 extraction_directory=os.path.join(dirname, 'extracted')
 
-expandPackageToDirectory(os.path.join(build_directory, 'raw_package.pkg'),extraction_directory)
+expandPackageToDirectory(os.path.join(build_directory, 'distribution.pkg'),extraction_directory)
 
 
-tree=ET.parse(os.path.join(extraction_directory, 'PackageInfo'))
+tree=ET.parse(os.path.join(extraction_directory, 'Distribution'))
 
 root = tree.getroot()
+script_node = root.find("script")
 
-version = root.attrib['version']
+script_source=script_node.text
 
-if (version == expected_version):
+found=False
+
+for line in script_source.splitlines():
+
+	if (line == expected_source_line):
+		found = True
+		break
+
+
+if (found == True):
 	print("[+] " + test_displayed_name + ": " + '\033[1m' + "Success" + '\033[0m')
 else:
 	print("[-] " + test_displayed_name + ": " + '\033[91m' + "Failure" + '\033[0m')
+
 
 # Cleanup
 
@@ -67,5 +78,3 @@ shutil.rmtree(build_directory)
 shutil.rmtree(extraction_directory)
 
 sys.exit()
-
-

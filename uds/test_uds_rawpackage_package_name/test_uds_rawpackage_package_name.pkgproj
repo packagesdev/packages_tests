@@ -13,7 +13,7 @@
 			<key>FOLLOW_SYMBOLIC_LINKS</key>
 			<false/>
 			<key>IDENTIFIER</key>
-			<string>com.mygreatcompany.pkg.testudsrawpackagepackagename</string>
+			<string>com.mygreatcompany.pkg.package</string>
 			<key>LOCATION</key>
 			<integer>0</integer>
 			<key>NAME</key>
