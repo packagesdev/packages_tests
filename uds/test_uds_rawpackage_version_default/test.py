@@ -5,6 +5,9 @@ import sys
 import subprocess
 import shutil
 
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'xar'))
+import xar
+
 import xml.etree.ElementTree as ET
 
 # Check that the version of the package set by the PACKAGE_VERSION user defined setting is correctly converted during the build process
@@ -28,23 +31,15 @@ stdout, stderr = process.communicate()
 
 expected_version = '1.0'
 
-relative_filepath=os.path.join('..', 'build', 'raw_package.pkg')
+build_directory=os.path.join(dirname, 'build')
 
-extract_folder=os.path.join(dirname, 'extracted')
+extraction_directory=os.path.join(dirname, 'extracted')
 
-os.mkdir(extract_folder)
-
-os.chdir(extract_folder)
-	
-
-process = subprocess.Popen(['/usr/bin/xar', '-x', '-f' , relative_filepath],
-                     stdout=subprocess.PIPE, 
-                     stderr=subprocess.PIPE)
-stdout, stderr = process.communicate()
+xar.expandPackageToDirectory(os.path.join(build_directory, 'raw_package.pkg'),extraction_directory)
 
 
 
-tree=ET.parse('PackageInfo')
+tree=ET.parse(os.path.join(extraction_directory, 'PackageInfo'))
 
 root = tree.getroot()
 
@@ -57,10 +52,8 @@ else:
 
 # Cleanup
 
-os.chdir('..')
-
-shutil.rmtree('build')
-shutil.rmtree('extracted')
+shutil.rmtree(build_directory)
+shutil.rmtree(extraction_directory)
 
 sys.exit()
 

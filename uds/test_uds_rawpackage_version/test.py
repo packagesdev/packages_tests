@@ -5,19 +5,10 @@ import sys
 import subprocess
 import shutil
 
-import xml.etree.ElementTree as ET
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'xar'))
+import xar
 
-def expandPackageToDirectory(inPackage,inDirectory):
-	try:
-    		os.makedirs(inDirectory)
-	except OSError as e:
-    		if e.errno != errno.EEXIST:
-        		raise
-	
-	process = subprocess.Popen(['/usr/bin/xar', '-x', '-f' , inPackage, '-C', inDirectory],
-						 stdout=subprocess.PIPE, 
-						 stderr=subprocess.PIPE)
-	stdout, stderr = process.communicate()
+import xml.etree.ElementTree as ET
 
 # Check that the version of the package set by the PACKAGE_VERSION user defined setting is correctly converted during the build process
 
@@ -47,7 +38,7 @@ build_directory=os.path.join(dirname, 'build')
 
 extraction_directory=os.path.join(dirname, 'extracted')
 
-expandPackageToDirectory(os.path.join(build_directory, 'raw_package.pkg'),extraction_directory)
+xar.expandPackageToDirectory(os.path.join(build_directory, 'raw_package.pkg'),extraction_directory)
 
 
 tree=ET.parse(os.path.join(extraction_directory, 'PackageInfo'))

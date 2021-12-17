@@ -7,20 +7,10 @@ import subprocess
 import shutil
 import codecs
 
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'xar'))
+import xar
 
 import xml.etree.ElementTree as ET
-
-def expandPackageToDirectory(inPackage,inDirectory):
-	try:
-    		os.makedirs(inDirectory)
-	except OSError as e:
-    		if e.errno != errno.EEXIST:
-        		raise
-	
-	process = subprocess.Popen(['/usr/bin/xar', '-x', '-f' , inPackage, '-C', inDirectory],
-						 stdout=subprocess.PIPE, 
-						 stderr=subprocess.PIPE)
-	stdout, stderr = process.communicate()
 
 # Check that the app locator bundle identifier defined as the LOCATOR_BUNDLE_IDENTIFIER user defined setting uses the default value set during the build process
 
@@ -47,14 +37,7 @@ build_directory=os.path.join(dirname, 'build')
 
 extraction_directory=os.path.join(dirname, 'extracted')
 
-expandPackageToDirectory(os.path.join(build_directory, 'distribution.pkg'),extraction_directory)
-
-
-build_directory=os.path.join(dirname, 'build')
-
-extraction_directory=os.path.join(dirname, 'extracted')
-
-expandPackageToDirectory(os.path.join(build_directory, 'raw_package.pkg'),extraction_directory)
+xar.expandPackageToDirectory(os.path.join(build_directory, 'raw_package.pkg'),extraction_directory)
 
 
 found = False

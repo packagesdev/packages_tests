@@ -7,20 +7,10 @@ import subprocess
 import shutil
 import codecs
 
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'xar'))
+import xar
 
 import xml.etree.ElementTree as ET
-
-def expandPackageToDirectory(inPackage,inDirectory):
-	try:
-    		os.makedirs(inDirectory)
-	except OSError as e:
-    		if e.errno != errno.EEXIST:
-        		raise
-	
-	process = subprocess.Popen(['/usr/bin/xar', '-x', '-f' , inPackage, '-C', inDirectory],
-						 stdout=subprocess.PIPE, 
-						 stderr=subprocess.PIPE)
-	stdout, stderr = process.communicate()
 
 # Check that the location of the package component of the distribution as the COMPONENT_LOCATION_PATH user defined setting is correctly converted during the build process
 
@@ -50,7 +40,7 @@ build_directory=os.path.join(dirname, 'build')
 
 extraction_directory=os.path.join(dirname, 'extracted')
 
-expandPackageToDirectory(os.path.join(build_directory, 'distribution.pkg'),extraction_directory)
+xar.expandPackageToDirectory(os.path.join(build_directory, 'distribution.pkg'),extraction_directory)
 
 
 if (os.path.exists(os.path.join(build_directory,'http','package.pkg')) == False ):
