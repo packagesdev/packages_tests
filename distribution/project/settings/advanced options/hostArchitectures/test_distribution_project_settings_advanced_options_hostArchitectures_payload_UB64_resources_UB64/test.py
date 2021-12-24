@@ -11,14 +11,14 @@ import xar
 
 import xml.etree.ElementTree as ET
 
-# Check that the hostArchitectures value is automatically set to arm64,x86_64 when the payload contains a Universal 64-bit binary and the resources contain no binaries
+# Check that the hostArchitectures value is automatically set to arm64,x86_64 when the payload contains a Universal 64-bit binary and the resources contain a Universal 64-bit binary
 
-test_displayed_name="distribution > project > settings > advanced option > host architectures > payload: UB64 / resources: none"
+test_displayed_name="distribution > project > settings > advanced option > host architectures > payload: UB64 / resources: UB64"
 
 # Given
 
 dirname = os.path.dirname(__file__)
-projectpath = os.path.join(dirname, 'test_distribution_project_settings_advanced_options_hostArchitectures_payload_UB64_resources_none.pkgproj')
+projectpath = os.path.join(dirname, 'test_distribution_project_settings_advanced_options_hostArchitectures_payload_UB64_resources_UB64.pkgproj')
 
 # When
 
