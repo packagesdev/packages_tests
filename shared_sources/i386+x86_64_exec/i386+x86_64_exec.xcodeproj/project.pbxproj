@@ -1,0 +1,216 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F443BA37277791C9006A40FE /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F443BA36277791C9006A40FE /* main.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F443BA31277791C9006A40FE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F443BA33277791C9006A40FE /* i386+x86_64_exec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "i386+x86_64_exec"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F443BA36277791C9006A40FE /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F443BA30277791C9006A40FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F443BA2A277791C9006A40FE = {
+			isa = PBXGroup;
+			children = (
+				F443BA35277791C9006A40FE /* i386+x86_64_exec */,
+				F443BA34277791C9006A40FE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F443BA34277791C9006A40FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F443BA33277791C9006A40FE /* i386+x86_64_exec */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F443BA35277791C9006A40FE /* i386+x86_64_exec */ = {
+			isa = PBXGroup;
+			children = (
+				F443BA36277791C9006A40FE /* main.c */,
+			);
+			path = "i386+x86_64_exec";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F443BA32277791C9006A40FE /* i386+x86_64_exec */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F443BA3C277791C9006A40FE /* Build configuration list for PBXNativeTarget "i386+x86_64_exec" */;
+			buildPhases = (
+				F443BA2F277791C9006A40FE /* Sources */,
+				F443BA30277791C9006A40FE /* Frameworks */,
+				F443BA31277791C9006A40FE /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "i386+x86_64_exec";
+			productName = "i386+x86_64_exec";
+			productReference = F443BA33277791C9006A40FE /* i386+x86_64_exec */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F443BA2B277791C9006A40FE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = WhiteBox;
+			};
+			buildConfigurationList = F443BA2E277791C9006A40FE /* Build configuration list for PBXProject "i386+x86_64_exec" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F443BA2A277791C9006A40FE;
+			productRefGroup = F443BA34277791C9006A40FE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F443BA32277791C9006A40FE /* i386+x86_64_exec */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F443BA2F277791C9006A40FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F443BA37277791C9006A40FE /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F443BA3A277791C9006A40FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F443BA3B277791C9006A40FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F443BA3D277791C9006A40FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F443BA3E277791C9006A40FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F443BA2E277791C9006A40FE /* Build configuration list for PBXProject "i386+x86_64_exec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F443BA3A277791C9006A40FE /* Debug */,
+				F443BA3B277791C9006A40FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F443BA3C277791C9006A40FE /* Build configuration list for PBXNativeTarget "i386+x86_64_exec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F443BA3D277791C9006A40FE /* Debug */,
+				F443BA3E277791C9006A40FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F443BA2B277791C9006A40FE /* Project object */;
+}
