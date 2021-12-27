@@ -41,7 +41,7 @@ xar.expandPackageToDirectory(os.path.join(build_directory, 'raw_package.pkg'),ex
 
 	# Check lsbom output
 
-process = subprocess.Popen(['/usr/bin/lsbom', '-fs', os.path.join(dirname, 'extracted','Bom')],
+process = subprocess.Popen(['/usr/bin/lsbom', '-fs', os.path.join(extraction_directory,'Bom')],
                      stdout=subprocess.PIPE, 
                      stderr=subprocess.PIPE)
 stdout, stderr = process.communicate()
