@@ -11,14 +11,14 @@ import xar
 
 import xml.etree.ElementTree as ET
 
-# Check that the hostArchitectures value is automatically not set when the payload contains a arm64 binary and the resources contain a arm64 binary
+# Check that the hostArchitectures value is automatically not set when the payload contains a arm64 binary and the resources contain a i386 binary
 
-test_displayed_name="distribution > project > settings > advanced option > host architectures > payload: arm64 / resources: x86_64"
+test_displayed_name="distribution > project > settings > advanced option > host architectures > payload: arm64 / resources: i386"
 
 # Given
 
 dirname = os.path.dirname(__file__)
-projectpath = os.path.join(dirname, 'test_distribution_project_settings_advanced_options_hostArchitectures_payload_arm64_resources_x86_64.pkgproj')
+projectpath = os.path.join(dirname, 'test_distribution_project_settings_advanced_options_hostArchitectures_payload_arm64_resources_i386.pkgproj')
 
 # When
 
