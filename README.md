@@ -2,6 +2,7 @@
 
 This repository contains scripts to check that features of Packages work as expected.
 
+- distribution: Scripts to check project settings and package component settings, payload.
 - uds: Scripts to check that the User Defined Settings are correctly converted or that the default value is correctly used.
 
 ## License
